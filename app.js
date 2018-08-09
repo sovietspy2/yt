@@ -4,15 +4,19 @@ var path = require("path");
 
 var app = express();
 
-var logger = function(req, res, next) {
-  console.log("Logged");
-  next();
-};
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(logger);
+var person = [
+  {
+    name: "jerry",
+    age: 12
+  }
+];
 
 app.get("/", (req, res) => {
-  res.send("Hello there");
+  res.json(person);
+  console.log("Something happend");
 });
 
 app.listen(80, () => {
